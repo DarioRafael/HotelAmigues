@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import './styles/global.css'; // Importamos los estilos globales
+import React, { useState, useEffect, useRef } from 'react';
+import './styles/global.css';
 import facebookIcon from './images/icon-facebook.webp';
 import twitterIcon from './images/icon-twitter.webp';
 import instagramIcon from './images/icon-instagram.webp';
 import backWallpaper from './images/back-wallpaper-amigues.webp';
-import Login from './pages/Login'; // Importa el componente de inicio de sesión
-import Register from './pages/Register'; // Importa el componente de registro
-import { MenuIcon, XIcon } from '@heroicons/react/outline'; // Iconos para el menú móvil
+import Login from './components/Login';
+import Register from './components/Register';
+import MobileMenu from './components/MobileMenu';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
 
 function App() {
   const [mostrarSesion, setMostrarSesion] = useState(false);
   const [mostrarRegistro, setMostrarRegistro] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para el menú móvil
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
-  // Efecto para manejar el scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -28,22 +30,35 @@ function App() {
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Llamada inicial
+    const handleClickOutside = (event) => {
+      if (isMenuOpen &&
+          menuRef.current &&
+          !menuRef.current.contains(event.target) &&
+          !buttonRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   const iniciarFuncion = () => {
     setMostrarSesion(true);
     setMostrarRegistro(false);
-    if (isMenuOpen) toggleMenu(); // Cierra el menú si está abierto
+    if (isMenuOpen) setIsMenuOpen(false);
   };
 
   const registroFuncion = () => {
     setMostrarSesion(false);
     setMostrarRegistro(true);
-    if (isMenuOpen) toggleMenu(); // Cierra el menú si está abierto
+    if (isMenuOpen) setIsMenuOpen(false);
   };
 
   const cerrarModales = () => {
@@ -51,80 +66,58 @@ function App() {
     setMostrarRegistro(false);
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   return (
       <div className="min-h-screen bg-gray-900 text-white">
-        {/* Header */}
-        <header
-            className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/70 backdrop-blur-md' : 'bg-transparent'}`}>
+        <header className={`fixed w-full z-40 transition-all duration-300 ${
+            isScrolled ? 'bg-black/70 backdrop-blur-md' : 'bg-transparent'
+        }`}>
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
-              {/* Logo/Título a la izquierda */}
               <h1 className="text-3xl font-serif font-bold text-white">
                 Hotel Amigues
               </h1>
 
-              {/* Botones de autenticación y menú móvil */}
               <div className="flex items-center">
-                {/* Botones de autenticación para pantallas medianas y superiores */}
+                {/* Botones de autenticación para desktop */}
                 <div className="hidden md:flex items-center space-x-4">
-                  <button onClick={iniciarFuncion} className="btn-primary text-sm">
+                  <button onClick={() => setMostrarSesion(true)} className="btn-primary text-sm">
                     Iniciar Sesión
                   </button>
-                  <button onClick={registroFuncion} className="btn-secondary text-sm">
+                  <button onClick={() => setMostrarRegistro(true)} className="btn-secondary text-sm">
                     Nueva Cuenta
                   </button>
                 </div>
 
-                {/* Botón de menú para pantallas pequeñas */}
+                {/* Botón del menú móvil */}
                 <div className="md:hidden">
-                  <button onClick={toggleMenu} className="text-white focus:outline-none">
-                    {isMenuOpen ? (
-                        <XIcon className="h-6 w-6" />
-                    ) : (
-                        <MenuIcon className="h-6 w-6" />
-                    )}
+                  <button
+                      onClick={() => setIsMenuOpen(true)}
+                      className="text-white focus:outline-none"
+                      aria-label="Abrir menú"
+                  >
+                    <MenuIcon className="h-6 w-6" />
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Navegación centrada debajo */}
-            {/* Menú para pantallas medianas y superiores */}
+            {/* Navegación desktop */}
             <nav className="hidden md:flex justify-center space-x-6 mt-4">
               <a href="#about" className="hover:text-red-400 transition-colors">Sobre Nosotros</a>
               <a href="#rooms" className="hover:text-red-400 transition-colors">Habitaciones</a>
               <a href="#services" className="hover:text-red-400 transition-colors">Servicios</a>
               <a href="#contact" className="hover:text-red-400 transition-colors">Contacto</a>
             </nav>
-
-            {/* Menú desplegable para pantallas pequeñas */}
-            {isMenuOpen && (
-                <nav
-                    className={`fixed top-0 right-0 h-full bg-gray-800 w-3/4 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-                  <div className="flex flex-col items-center space-y-4 mt-10">
-                    <a href="#about" className="hover:text-red-400 transition-colors" onClick={toggleMenu}>Sobre Nosotros</a>
-                    <a href="#rooms" className="hover:text-red-400 transition-colors" onClick={toggleMenu}>Habitaciones</a>
-                    <a href="#services" className="hover:text-red-400 transition-colors" onClick={toggleMenu}>Servicios</a>
-                    <a href="#contact" className="hover:text-red-400 transition-colors" onClick={toggleMenu}>Contacto</a>
-                    {/* Botones de autenticación para pantallas pequeñas */}
-                    <div className="flex flex-col items-center space-y-2 mt-4">
-                      <button onClick={iniciarFuncion} className="btn-primary w-full">
-                        Iniciar Sesión
-                      </button>
-                      <button onClick={registroFuncion} className="btn-secondary w-full">
-                        Nueva Cuenta
-                      </button>
-                    </div>
-                  </div>
-                </nav>
-            )}
-
           </div>
         </header>
+
+        {/* Menú móvil como componente separado */}
+        <MobileMenu
+            isOpen={isMenuOpen}
+            onClose={() => setIsMenuOpen(false)}
+            onLoginClick={iniciarFuncion}
+            onRegisterClick={registroFuncion}
+        />
 
         {/* Hero Section con efecto parallax */}
         <section className="parallax h-screen flex items-center justify-center">
@@ -188,15 +181,15 @@ function App() {
               <a href="#" className="footer-link">Términos de Servicio</a>
               <a href="#" className="footer-link">Contacto</a>
             </div>
-            <div className="flex justify-center space-x-4">
+            <div className="flex justify-center space-x-4 social-icons-container">
               <a href="#" className="social-icon">
-                <img src={facebookIcon} alt="Facebook" className="w-6 h-6" />
+                <img src={facebookIcon} alt="Facebook" className="w-6 h-6"/>
               </a>
               <a href="#" className="social-icon">
-                <img src={twitterIcon} alt="Twitter" className="w-6 h-6" />
+                <img src={twitterIcon} alt="Twitter" className="w-6 h-6"/>
               </a>
               <a href="#" className="social-icon">
-                <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
+                <img src={instagramIcon} alt="Instagram" className="w-6 h-6"/>
               </a>
             </div>
           </div>

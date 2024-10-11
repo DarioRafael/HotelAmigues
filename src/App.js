@@ -6,13 +6,15 @@ import instagramIcon from './images/icon-instagram.webp';
 import backWallpaper from './images/back-wallpaper-amigues.webp';
 import Login from './pages/Login'; // Importa el componente de inicio de sesión
 import Register from './pages/Register'; // Importa el componente de registro
+import { MenuIcon, XIcon } from '@heroicons/react/outline'; // Iconos para el menú móvil
 
 function App() {
   const [mostrarSesion, setMostrarSesion] = useState(false);
   const [mostrarRegistro, setMostrarRegistro] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para el menú móvil
 
-  // Efecto para manejar el scroll .
+  // Efecto para manejar el scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -35,11 +37,13 @@ function App() {
   const iniciarFuncion = () => {
     setMostrarSesion(true);
     setMostrarRegistro(false);
+    if (isMenuOpen) toggleMenu(); // Cierra el menú si está abierto
   };
 
   const registroFuncion = () => {
     setMostrarSesion(false);
     setMostrarRegistro(true);
+    if (isMenuOpen) toggleMenu(); // Cierra el menú si está abierto
   };
 
   const cerrarModales = () => {
@@ -47,10 +51,15 @@ function App() {
     setMostrarRegistro(false);
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
       <div className="min-h-screen bg-gray-900 text-white">
         {/* Header */}
-        <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/70 backdrop-blur-md' : 'bg-transparent'}`}>
+        <header
+            className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black/70 backdrop-blur-md' : 'bg-transparent'}`}>
           <div className="container mx-auto px-6 py-4">
             <div className="flex justify-between items-center">
               {/* Logo/Título a la izquierda */}
@@ -58,30 +67,68 @@ function App() {
                 Hotel Amigues
               </h1>
 
-              {/* Botones de autenticación a la derecha */}
-              <div className="flex items-center space-x-4">
-                <button onClick={iniciarFuncion} className="btn-primary text-sm">
-                  Iniciar Sesión
-                </button>
-                <button onClick={registroFuncion} className="btn-secondary text-sm">
-                  Nueva Cuenta
-                </button>
+              {/* Botones de autenticación y menú móvil */}
+              <div className="flex items-center">
+                {/* Botones de autenticación para pantallas medianas y superiores */}
+                <div className="hidden md:flex items-center space-x-4">
+                  <button onClick={iniciarFuncion} className="btn-primary text-sm">
+                    Iniciar Sesión
+                  </button>
+                  <button onClick={registroFuncion} className="btn-secondary text-sm">
+                    Nueva Cuenta
+                  </button>
+                </div>
+
+                {/* Botón de menú para pantallas pequeñas */}
+                <div className="md:hidden">
+                  <button onClick={toggleMenu} className="text-white focus:outline-none">
+                    {isMenuOpen ? (
+                        <XIcon className="h-6 w-6" />
+                    ) : (
+                        <MenuIcon className="h-6 w-6" />
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
 
             {/* Navegación centrada debajo */}
-            <nav className="flex justify-center space-x-6 mt-4">
+            {/* Menú para pantallas medianas y superiores */}
+            <nav className="hidden md:flex justify-center space-x-6 mt-4">
               <a href="#about" className="hover:text-red-400 transition-colors">Sobre Nosotros</a>
               <a href="#rooms" className="hover:text-red-400 transition-colors">Habitaciones</a>
               <a href="#services" className="hover:text-red-400 transition-colors">Servicios</a>
               <a href="#contact" className="hover:text-red-400 transition-colors">Contacto</a>
             </nav>
+
+            {/* Menú desplegable para pantallas pequeñas */}
+            {isMenuOpen && (
+                <nav
+                    className={`fixed top-0 right-0 h-full bg-gray-800 w-3/4 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                  <div className="flex flex-col items-center space-y-4 mt-10">
+                    <a href="#about" className="hover:text-red-400 transition-colors" onClick={toggleMenu}>Sobre Nosotros</a>
+                    <a href="#rooms" className="hover:text-red-400 transition-colors" onClick={toggleMenu}>Habitaciones</a>
+                    <a href="#services" className="hover:text-red-400 transition-colors" onClick={toggleMenu}>Servicios</a>
+                    <a href="#contact" className="hover:text-red-400 transition-colors" onClick={toggleMenu}>Contacto</a>
+                    {/* Botones de autenticación para pantallas pequeñas */}
+                    <div className="flex flex-col items-center space-y-2 mt-4">
+                      <button onClick={iniciarFuncion} className="btn-primary w-full">
+                        Iniciar Sesión
+                      </button>
+                      <button onClick={registroFuncion} className="btn-secondary w-full">
+                        Nueva Cuenta
+                      </button>
+                    </div>
+                  </div>
+                </nav>
+            )}
+
           </div>
         </header>
 
         {/* Hero Section con efecto parallax */}
         <section className="parallax h-screen flex items-center justify-center">
-          <div className="absolute inset-0 bg-black/40"/>
+          <div className="absolute inset-0 bg-black/40" />
           <div className="relative z-10 text-center px-4">
             <div className="max-w-3xl reveal">
               <h1 className="text-5xl md:text-6xl font-serif mb-6">
@@ -98,7 +145,7 @@ function App() {
         <main className="py-20 bg-gray-800">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto reveal">
-              <h2 className="text-4xl font-serif text-center mb-10 text-white">
+              <h2 className="text-3xl md:text-4xl font-serif text-center mb-10 text-white">
                 Información sobre nuestro Hotel
               </h2>
               <div className="space-y-6 text-gray-300">
@@ -143,13 +190,13 @@ function App() {
             </div>
             <div className="flex justify-center space-x-4">
               <a href="#" className="social-icon">
-                <img src={facebookIcon} alt="Facebook" className="w-6 h-6"/>
+                <img src={facebookIcon} alt="Facebook" className="w-6 h-6" />
               </a>
               <a href="#" className="social-icon">
-                <img src={twitterIcon} alt="Twitter" className="w-6 h-6"/>
+                <img src={twitterIcon} alt="Twitter" className="w-6 h-6" />
               </a>
               <a href="#" className="social-icon">
-                <img src={instagramIcon} alt="Instagram" className="w-6 h-6"/>
+                <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
               </a>
             </div>
           </div>

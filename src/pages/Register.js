@@ -25,7 +25,7 @@ const Register = ({ onClose }) => {
                             value={nombre}
                             onChange={(e) => setNombre(e.target.value)}
                             required
-                            className="form-input"
+                            className="form-input text-black" // Añadir text-black aquí
                         />
                     </div>
                     <div>
@@ -35,7 +35,7 @@ const Register = ({ onClose }) => {
                             value={apellidos}
                             onChange={(e) => setApellidos(e.target.value)}
                             required
-                            className="form-input"
+                            className="form-input text-black" // Añadir text-black aquí
                         />
                     </div>
                     <div>
@@ -45,7 +45,7 @@ const Register = ({ onClose }) => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="form-input"
+                            className="form-input text-black" // Añadir text-black aquí
                         />
                     </div>
                     <div>
@@ -55,7 +55,7 @@ const Register = ({ onClose }) => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="form-input"
+                            className="form-input text-black" // Añadir text-black aquí
                         />
                     </div>
                     <button type="submit" className="btn-primary w-full">Registrar</button>

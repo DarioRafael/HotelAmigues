@@ -1,0 +1,138 @@
+/* src/styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lora:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos base personalizados */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply font-sans text-gray-200 bg-gray-900; /* Fondo oscuro para el cuerpo */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-serif text-white; /* Títulos en blanco para mayor legibilidad */
+    }
+}
+
+/* Componentes personalizados */
+@layer components {
+    .container {
+        @apply max-w-7xl mx-auto px-4;
+    }
+
+    .btn-primary {
+        @apply bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors; /* Botón primario en rojo elegante */
+    }
+
+    .btn-secondary {
+        @apply border-2 border-red-600 text-red-600 px-6 py-2 rounded-full hover:bg-red-600 hover:text-white transition-colors; /* Botón secundario */
+    }
+
+    .form-input {
+        @apply w-full px-3 py-2 border border-gray-700 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none; /* Campos de formulario con borde oscuro */
+    }
+
+    .nav-link {
+        @apply transition-colors hover:text-red-400; /* Cambia a un rojo más claro al pasar el ratón */
+    }
+
+    header {
+        position: fixed;
+        width: 100%;
+        z-index: 50;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Asegúrate de que el contenido principal no quede detrás del header */
+    main {
+        padding-top: 120px; /* Ajusta este valor según la altura de tu header */
+    }
+}
+
+/* Utilidades personalizadas */
+@layer utilities {
+    .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .backdrop-blur {
+        backdrop-filter: blur(8px);
+    }
+}
+
+/* Animaciones para elementos al hacer scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estilos para el modal */
+.modal-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-75 backdrop-blur-sm; /* Fondo oscuro del modal */
+    z-index: 50;
+}
+
+.modal-content {
+    @apply bg-gray-800 rounded-lg shadow-xl p-6 max-w-md w-full mx-4; /* Fondo gris oscuro para el contenido del modal */
+    animation: modal-appear 0.3s ease-out;
+}
+
+@keyframes modal-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Efectos hover para las tarjetas de habitaciones */
+.room-card {
+    @apply transition-all duration-300 bg-gray-800 rounded-lg; /* Fondo gris oscuro para las tarjetas */
+}
+
+.room-card:hover {
+    @apply shadow-2xl -translate-y-2;
+}
+
+.room-card img {
+    @apply transition-transform duration-300;
+}
+
+.room-card:hover img {
+    @apply scale-105;
+}
+
+/* Efecto parallax para el hero */
+.parallax {
+    @apply relative min-h-screen bg-fixed bg-center bg-cover;
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo semi-transparente */
+}
+
+/* Estilos para el footer */
+.footer-link {
+    @apply text-gray-400 hover:text-red-400 transition-colors; /* Enlaces del footer */
+}
+
+.social-icon {
+    @apply w-8 h-8 text-gray-400 transition-transform duration-300 ease-in-out; /* Iconos de redes sociales */
+}
+
+.social-icon:hover {
+    @apply scale-110 text-red-400; /* Escala al 110% y cambia el color al pasar el mouse */
+}

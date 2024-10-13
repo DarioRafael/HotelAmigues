@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { X } from 'lucide-react';
 
 const MobileMenu = ({ isOpen, onClose, onLoginClick, onRegisterClick }) => {
@@ -31,7 +32,6 @@ const MobileMenu = ({ isOpen, onClose, onLoginClick, onRegisterClick }) => {
 
     const handleLoginClick = () => {
         handleClose();
-        // Aseguramos que el menú se cierre antes de abrir el modal
         setTimeout(() => {
             onLoginClick();
         }, 300);
@@ -39,7 +39,6 @@ const MobileMenu = ({ isOpen, onClose, onLoginClick, onRegisterClick }) => {
 
     const handleRegisterClick = () => {
         handleClose();
-        // Aseguramos que el menú se cierre antes de abrir el modal
         setTimeout(() => {
             onRegisterClick();
         }, 300);
@@ -64,12 +63,12 @@ const MobileMenu = ({ isOpen, onClose, onLoginClick, onRegisterClick }) => {
 
                 <div className="flex flex-col p-6 pt-16 h-full">
                     <nav className="space-y-4">
-                        <a href="#about" className="block text-gray-800 hover:text-gray-600 py-2">
-                            Sobre Nosotros
-                        </a>
-                        <a href="#rooms" className="block text-gray-800 hover:text-gray-600 py-2">
+                        <Link to="/" className="block text-gray-800 hover:text-gray-600 py-2" onClick={handleClose}>
+                            Inicio
+                        </Link>
+                        <Link to="/habitaciones" className="block text-gray-800 hover:text-gray-600 py-2" onClick={handleClose}>
                             Habitaciones
-                        </a>
+                        </Link>
                         <a href="#services" className="block text-gray-800 hover:text-gray-600 py-2">
                             Servicios
                         </a>

@@ -9,6 +9,8 @@ import Register from './components/Register';
 import MobileMenu from './components/MobileMenu';
 import PaginaPrincipal from './components/PaginaPrincipal';
 import Habitaciones from './components/Habitaciones';
+import Servicios from './components/Servicios';
+import Contacto from './components/Contacto';
 import { MenuIcon, XIcon, HomeIcon } from '@heroicons/react/outline';
 
 function App() {
@@ -102,8 +104,8 @@ function App() {
               <nav className="hidden md:flex justify-center space-x-6 mt-4">
                 <Link to="/" className="hover:text-red-400 transition-colors">Inicio</Link>
                 <Link to="/habitaciones" className="hover:text-red-400 transition-colors">Habitaciones</Link>
-                <a href="#services" className="hover:text-red-400 transition-colors">Servicios</a>
-                <a href="#contact" className="hover:text-red-400 transition-colors">Contacto</a>
+                <a href="/servicios" className="hover:text-red-400 transition-colors">Servicios</a>
+                <a href="/contacto" className="hover:text-red-400 transition-colors">Contacto</a>
               </nav>
             </div>
           </header>
@@ -119,6 +121,8 @@ function App() {
           <Routes>
             <Route path="/" element={<PaginaPrincipal />} />
             <Route path="/habitaciones" element={<Habitaciones />} />
+            <Route path="/servicios" element={<Servicios />} />
+            <Route path="/contacto" element={<Contacto />} />
           </Routes>
 
           {mostrarSesion && (
@@ -135,17 +139,17 @@ function App() {
               <div className="flex justify-center space-x-6 mb-4">
                 <a href="#" className="footer-link">Política de Privacidad</a>
                 <a href="#" className="footer-link">Términos de Servicio</a>
-                <a href="#" className="footer-link">Contacto</a>
+                <a href="/contacto" className="footer-link">Contacto</a>
               </div>
               <div className="flex justify-center space-x-4 social-icons-container">
                 <a href="#" className="social-icon">
-                  <img src={facebookIcon} alt="Facebook" className="w-6 h-6"/>
+                  <img src={facebookIcon} alt="Facebook" />
                 </a>
                 <a href="#" className="social-icon">
-                  <img src={twitterIcon} alt="Twitter" className="w-6 h-6"/>
+                  <img src={twitterIcon} alt="Twitter" />
                 </a>
                 <a href="#" className="social-icon">
-                  <img src={instagramIcon} alt="Instagram" className="w-6 h-6"/>
+                  <img src={instagramIcon} alt="Instagram" />
                 </a>
               </div>
             </div>

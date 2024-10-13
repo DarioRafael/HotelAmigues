@@ -46,18 +46,18 @@ function PaginaPrincipal() {
                             Información sobre nuestro Hotel
                         </h2>
                         <div className="space-y-6 text-gray-300">
-                            <p className="reveal">
+                            <p className="reveal text-justify">
                                 Hotel "Amigues" es un lugar donde la comodidad y la hospitalidad se encuentran.
                                 Ofrecemos habitaciones modernas y acogedoras en ubicaciones privilegiadas en toda la ciudad.
                                 Ya sea que estés viajando por negocios o por placer, nuestros hoteles proporcionan todo
                                 lo que necesitas para una estadía memorable.
                             </p>
-                            <p className="reveal">
+                            <p className="reveal text-justify">
                                 Disfruta de nuestras comodidades de lujo, como piscinas, gimnasios, Wi-Fi gratuito
                                 y restaurantes gourmet. Nuestro personal está comprometido a ofrecerte el mejor servicio,
                                 asegurándose de que cada momento de tu estancia sea perfecto.
                             </p>
-                            <p className="reveal">
+                            <p className="reveal text-justify">
                                 No importa cuál sea tu destino, en Hotel "Amigues" te garantizamos una experiencia
                                 inolvidable. ¡Te esperamos para hacer de tu estancia un momento especial!
                             </p>

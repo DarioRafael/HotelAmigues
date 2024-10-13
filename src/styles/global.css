@@ -220,7 +220,7 @@
 }
 
 .social-icon {
-    @apply text-gray-400 transition-transform duration-300 ease-in-out;
+    @apply text-gray-400 transition-transform duration-300 ease-in-out w-8 h-8 ;
 }
 
 .social-icon:hover {

@@ -51,28 +51,28 @@ const MobileMenu = ({ isOpen, onClose, onLoginClick, onRegisterClick }) => {
             <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
             <div
                 ref={menuRef}
-                className={`absolute right-0 top-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out
+                className={`absolute right-0 top-0 h-full w-64 bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out
                 ${isClosing ? 'translate-x-full' : 'translate-x-0'}`}
             >
                 <button
                     onClick={handleClose}
-                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100"
+                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-700 text-gray-300 hover:text-white"
                 >
-                    <X className="w-6 h-6 text-gray-600" />
+                    <X className="w-6 h-6" />
                 </button>
 
                 <div className="flex flex-col p-6 pt-16 h-full">
                     <nav className="space-y-4">
-                        <Link to="/" className="block text-gray-800 hover:text-gray-600 py-2" onClick={handleClose}>
+                        <Link to="/" className="block text-gray-300 hover:text-white py-2" onClick={handleClose}>
                             Inicio
                         </Link>
-                        <Link to="/habitaciones" className="block text-gray-800 hover:text-gray-600 py-2" onClick={handleClose}>
+                        <Link to="/habitaciones" className="block text-gray-300 hover:text-white py-2" onClick={handleClose}>
                             Habitaciones
                         </Link>
-                        <a href="#services" className="block text-gray-800 hover:text-gray-600 py-2">
+                        <Link to="/servicios" className="block text-gray-300 hover:text-white py-2" onClick={handleClose}>
                             Servicios
-                        </a>
-                        <a href="#contact" className="block text-gray-800 hover:text-gray-600 py-2">
+                        </Link>
+                        <a href="/contacto" className="block text-gray-300 hover:text-white py-2">
                             Contacto
                         </a>
                     </nav>
@@ -80,13 +80,13 @@ const MobileMenu = ({ isOpen, onClose, onLoginClick, onRegisterClick }) => {
                     <div className="mt-auto space-y-4 pb-6">
                         <button
                             onClick={handleLoginClick}
-                            className="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                            className="w-full py-2 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                         >
                             Iniciar Sesión
                         </button>
                         <button
                             onClick={handleRegisterClick}
-                            className="w-full py-2 px-4 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
+                            className="w-full py-2 px-4 border border-red-600 text-red-400 rounded-lg hover:bg-red-900 hover:text-red-300 transition-colors"
                         >
                             Nueva Cuenta
                         </button>

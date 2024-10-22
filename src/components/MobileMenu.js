@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { X } from 'lucide-react';
+import { HomeIcon, KeyIcon, CogIcon, MailIcon, UserIcon } from "@heroicons/react/outline";
 
 const MobileMenu = ({ isOpen, onClose, onLoginClick, onRegisterClick }) => {
     const menuRef = useRef(null);
@@ -64,17 +65,38 @@ const MobileMenu = ({ isOpen, onClose, onLoginClick, onRegisterClick }) => {
                 <div className="flex flex-col p-6 pt-16 h-full">
                     <nav className="space-y-4">
                         <Link to="/" className="block text-gray-300 hover:text-white py-2" onClick={handleClose}>
-                            Inicio
+                            <div className="flex items-center space-x-2">
+                                <HomeIcon className="h-6 w-6 text-red-600"/> {/* Ícono de inicio */}
+                                <span className="text-white">Inicio</span> {/* Texto al lado del ícono */}
+                            </div>
                         </Link>
-                        <Link to="/habitaciones" className="block text-gray-300 hover:text-white py-2" onClick={handleClose}>
-                            Habitaciones
+                        <Link to="/habitaciones" className="block text-gray-300 hover:text-white py-2"
+                              onClick={handleClose}>
+                            <div className="flex items-center space-x-2">
+                                <KeyIcon className="h-6 w-6 text-red-600" /> {/* Ícono de inicio */}
+                                <span className="text-white">Habitación</span> {/* Texto al lado del ícono */}
+                            </div>
                         </Link>
-                        <Link to="/servicios" className="block text-gray-300 hover:text-white py-2" onClick={handleClose}>
-                            Servicios
+                        <Link to="/servicios" className="block text-gray-300 hover:text-white py-2"
+                              onClick={handleClose}>
+                            <div className="flex items-center space-x-2">
+                                <CogIcon className="h-6 w-6 text-red-600"/> {/* Ícono de inicio */}
+                                <span className="text-white">Servicios</span> {/* Texto al lado del ícono */}
+                            </div>
                         </Link>
                         <a href="/contacto" className="block text-gray-300 hover:text-white py-2">
-                            Contacto
+                            <div className="flex items-center space-x-2">
+                                <MailIcon className="h-6 w-6 text-red-600"/> {/* Ícono de inicio */}
+                                <span className="text-white">Contacto</span> {/* Texto al lado del ícono */}
+                            </div>
                         </a>
+                        <Link to="/creadores" className="block text-gray-300 hover:text-white py-2"
+                              onClick={handleClose}>
+                            <div className="flex items-center space-x-2">
+                                <UserIcon className="h-6 w-6 text-red-600"/> {/* Ícono de inicio */}
+                                <span className="text-white">Creadores</span> {/* Texto al lado del ícono */}
+                            </div>
+                        </Link>
                     </nav>
 
                     <div className="mt-auto space-y-4 pb-6">

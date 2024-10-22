@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* creadoresStyle.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.creador-card {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.creador-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.creador-image {
+    transition: transform 0.3s ease;
+}
+
+.creador-image:hover {
+    transform: scale(1.05);
+}
+
+.creador-name {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.creador-name:hover {
+    color: #f472b6;
+}
+
+.creador-role {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.creador-role:hover {
+    color: #f9fafb;
+}
+
+.icon {
+    transition: transform 0.3s ease;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+}
+
+.team-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.team-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}

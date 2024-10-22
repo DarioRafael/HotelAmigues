@@ -11,7 +11,8 @@ import PaginaPrincipal from './components/PaginaPrincipal';
 import Habitaciones from './components/Habitaciones';
 import Servicios from './components/Servicios';
 import Contacto from './components/Contacto';
-import { MenuIcon, XIcon, HomeIcon } from '@heroicons/react/outline';
+import Creadores from './components/Creadores';
+import { MenuIcon, XIcon, HomeIcon, InformationCircleIcon, PhoneIcon, UserCircleIcon } from '@heroicons/react/outline';
 
 function App() {
   const [mostrarSesion, setMostrarSesion] = useState(false);
@@ -65,25 +66,50 @@ function App() {
   return (
       <Router>
         <div className="min-h-screen bg-gray-900 text-white">
-          <header className={`fixed w-full z-40 transition-all duration-300 ${
-              isScrolled ? 'bg-black/70 backdrop-blur-md' : 'bg-transparent'
+          {/* Header */}
+          <header className={`fixed w-full z-40 transition-all duration-300 ease-in-out ${
+              isScrolled ? 'bg-black/70 backdrop-blur-md py-2' : 'bg-transparent py-4'
           }`}>
-            <div className="container mx-auto px-6 py-4">
+            <div className="container mx-auto px-6">
               <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-serif font-bold text-white">
+                <Link to="/" className="text-3xl font-sans font-bold text-white">
                   Hotel Amigues
-                </h1>
+                </Link>
 
-                <div className="flex items-center">
-                  <Link to="/" className="mr-4">
-                    <HomeIcon className="h-6 w-6 text-white hover:text-red-400 transition-colors" />
-                  </Link>
+                <div className="flex items-center space-x-4">
+                  <nav className="hidden md:flex items-center space-x-6">
+                    <Link to="/" className="flex items-center hover:text-red-400 transition-colors">
+                      Inicio
+                    </Link>
+                    <Link to="/habitaciones" className="flex items-center hover:text-red-400 transition-colors">
+                      Habitaciones
+                    </Link>
+                    <Link to="/servicios" className="flex items-center hover:text-red-400 transition-colors">
+                      Servicios
+                    </Link>
+                    <Link to="/contacto" className="flex items-center hover:text-red-400 transition-colors">
+                      Contacto
+                    </Link>
+                    <Link to="/creadores" className="flex items-center hover:text-red-400 transition-colors">
+                      Creadores
+                    </Link>
 
-                  <div className="hidden md:flex items-center space-x-4">
-                    <button onClick={() => setMostrarSesion(true)} className="btn-primary text-sm">
+
+                  </nav>
+
+                  <div className="hidden md:flex space-x-4">
+                    <button
+                        onClick={iniciarFuncion}
+                        className="btn-primary flex items-center text-sm bg-red-900 px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                    >
+                      <UserCircleIcon className="h-5 w-5 mr-2" />
                       Iniciar Sesión
                     </button>
-                    <button onClick={() => setMostrarRegistro(true)} className="btn-secondary text-sm">
+                    <button
+                        onClick={registroFuncion}
+                        className="btn-secondary flex items-center text-sm bg-gray-700 px-4 py-2 rounded-md hover:bg-green-700 transition-colors"
+                    >
+                      <UserCircleIcon className="h-5 w-5 mr-2" />
                       Nueva Cuenta
                     </button>
                   </div>
@@ -100,16 +126,10 @@ function App() {
                   </div>
                 </div>
               </div>
-
-              <nav className="hidden md:flex justify-center space-x-6 mt-4">
-                <Link to="/" className="hover:text-red-400 transition-colors">Inicio</Link>
-                <Link to="/habitaciones" className="hover:text-red-400 transition-colors">Habitaciones</Link>
-                <a href="/servicios" className="hover:text-red-400 transition-colors">Servicios</a>
-                <a href="/contacto" className="hover:text-red-400 transition-colors">Contacto</a>
-              </nav>
             </div>
           </header>
 
+          {/* Mobile Menu */}
           <MobileMenu
               isOpen={isMenuOpen}
               onClose={() => setIsMenuOpen(false)}
@@ -118,13 +138,16 @@ function App() {
               ref={menuRef}
           />
 
+          {/* Routes */}
           <Routes>
             <Route path="/" element={<PaginaPrincipal />} />
             <Route path="/habitaciones" element={<Habitaciones />} />
             <Route path="/servicios" element={<Servicios />} />
             <Route path="/contacto" element={<Contacto />} />
+            <Route path="/creadores" element={<Creadores />} />
           </Routes>
 
+          {/* Modales */}
           {mostrarSesion && (
               <Login onClose={cerrarModales} />
           )}
@@ -133,6 +156,7 @@ function App() {
               <Register onClose={cerrarModales} />
           )}
 
+          {/* Footer */}
           <footer className="bg-gray-800 text-gray-200 py-10">
             <div className="container mx-auto px-4 text-center">
               <p className="mb-4">© 2024 Hotel "Amigues". Todos los derechos reservados.</p>

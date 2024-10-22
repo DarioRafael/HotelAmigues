@@ -14,54 +14,49 @@
 
     body {
         @apply font-sans text-gray-200 bg-gray-900;
+        font-family: 'Lora', serif; /* Usamos Lora para el cuerpo de texto */
     }
 
     h1, h2, h3, h4, h5, h6 {
         @apply font-serif text-white;
+        font-family: 'Playfair Display', serif; /* Usamos Playfair Display para los títulos */
     }
 
     a {
         @apply text-white;
+        font-family: 'Poppins', sans-serif; /* Usamos Poppins para los enlaces */
+    }
+
+    p {
+        font-family: 'Lora', serif; /* Aseguramos que los párrafos también usen Lora */
     }
 }
 
 /* ========= COMPONENT STYLES ========= */
 @layer components {
-    /* --- Container --- */
-    .container {
-        @apply max-w-7xl mx-auto px-4;
+    /* --- Botones --- */
+    .btn-primary, .btn-secondary {
+        font-family: 'Poppins', sans-serif; /* Usamos Poppins para los botones */
     }
 
-    /* --- Buttons --- */
-    .btn-primary {
-        @apply bg-red-600 text-white px-4 py-2 rounded-full hover:bg-red-700 transition-colors;
-    }
-
-    .btn-secondary {
-        @apply border-2 border-red-600 text-red-600 px-4 py-2 rounded-full hover:bg-red-600 hover:text-white transition-colors;
-    }
-
-    /* --- Form Elements --- */
-    .form-input {
-        @apply w-full px-3 py-2 border border-gray-700 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent outline-none;
-    }
-
-    /* --- Navigation --- */
+    /* --- Enlaces de navegación --- */
     .nav-link {
-        @apply transition-colors hover:text-red-400;
+        font-family: 'Poppins', sans-serif; /* Poppins para la navegación */
     }
 
-    /* --- Header --- */
-    header {
-        position: fixed;
-        width: 100%;
-        z-index: 50;
-        transition: all 0.3s ease-in-out;
+    /* --- Input del formulario --- */
+    .form-input {
+        font-family: 'Lora', serif; /* Lora para los elementos de formularios */
     }
 
-    /* --- Main Content Spacing --- */
-    main {
-        padding-top: 120px;
+    /* --- Tarjetas de habitación --- */
+    .room-card {
+        font-family: 'Lora', serif; /* Lora para cualquier texto dentro de las tarjetas */
+    }
+
+    /* --- Footer y enlaces sociales --- */
+    .footer-link {
+        font-family: 'Poppins', sans-serif; /* Poppins para los enlaces en el footer */
     }
 }
 

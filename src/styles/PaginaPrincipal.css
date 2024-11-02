@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500&family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+.title-decoration {
+    position: relative;
+    display: inline-block;
+}
+
+.title-decoration::before,
+.title-decoration::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    width: 50%;
+    bottom: -10px;
+}
+
+.title-decoration::before {
+    left: -15%;
+}
+
+.title-decoration::after {
+    right: -15%;
+}
+
+.elegant-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.title-main {
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    background: linear-gradient(to right, #fff, #e2e2e2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}

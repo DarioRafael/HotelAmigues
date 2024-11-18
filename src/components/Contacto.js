@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
     Mail,
@@ -9,16 +9,52 @@ import {
     Instagram,
     Twitter,
     Send,
-    ArrowRight
 } from 'lucide-react';
-import '../styles/contactoSyle.css';
 
 const Contacto = () => {
+    // Solo agregamos el estado para el formulario
+    const [formData, setFormData] = useState({
+        nombre: '',
+        email: '',
+        mensaje: ''
+    });
+
+    // Función para manejar cambios en los inputs
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    // Función para manejar el envío del formulario
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Crear el cuerpo del correo con formato
+        const mailtoBody = `Nombre: ${formData.nombre}%0D%0A
+        Mensaje: ${formData.mensaje}`;
+
+        // Crear el enlace mailto con los datos del formulario
+        const mailtoLink = `mailto:hotelamiguestec@gmail.com?subject=Nuevo mensaje de contacto&body=${mailtoBody}`;
+
+        // Abrir el cliente de correo predeterminado
+        window.location.href = mailtoLink;
+
+        // Limpiar el formulario después del envío
+        setFormData({
+            nombre: '',
+            email: '',
+            mensaje: ''
+        });
+    };
+
     const contactInfo = [
         {
             icon: Mail,
             title: "Correo Electrónico",
-            description: "hotelamiguestec@hotmail.com",
+            description: "hotelamiguestec@gmail.com",
             color: "bg-purple-500"
         },
         {
@@ -128,27 +164,41 @@ const Contacto = () => {
                     <h3 className="text-2xl font-bold text-white mb-6 text-center">
                         ¿Tienes alguna pregunta?
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <input
                             type="text"
+                            name="nombre"
+                            value={formData.nombre}
+                            onChange={handleInputChange}
                             placeholder="Nombre completo"
                             className="bg-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-purple-500 outline-none"
+                            required
                         />
                         <input
                             type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
                             placeholder="Correo electrónico"
                             className="bg-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-purple-500 outline-none"
+                            required
                         />
                         <textarea
+                            name="mensaje"
+                            value={formData.mensaje}
+                            onChange={handleInputChange}
                             className="bg-gray-700 text-white rounded-lg p-3 focus:ring-2 focus:ring-purple-500 outline-none md:col-span-2"
                             placeholder="Tu mensaje"
                             rows="4"
+                            required
                         />
-                        <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg md:col-span-2 flex items-center justify-center space-x-2 group transition-all duration-300">
+                        <button
+                            type="submit"
+                            className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg md:col-span-2 flex items-center justify-center space-x-2 group transition-all duration-300">
                             <span>Enviar Mensaje</span>
                             <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </button>
-                    </div>
+                    </form>
                 </motion.div>
 
                 <motion.div

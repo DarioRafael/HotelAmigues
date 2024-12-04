@@ -1,130 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BedDouble, Wifi, Coffee, TrendingUp, ChevronLeft, ChevronRight } from 'lucide-react';
+import Reservar from './Reservar'; // Adjust import path as needed
 
 const importAll = (r) => r.keys().map(r);
 const imagenesSencilla = importAll(require.context('./assets/imgsencilla', false, /\.(jpg|jpeg|png)$/));
 const imagenesDoble = importAll(require.context('./assets/imgdoble', false, /\.(jpg|jpeg|png)$/));
 const imagenesFamiliar = importAll(require.context('./assets/imgfamiliar', false, /\.(jpg|jpeg|png)$/));
 const imagenesDeluxe = importAll(require.context('./assets/imgdeluxe', false, /\.(jpg|jpeg|png)$/));
-
-const Reservar = ({ onClose, habitacionSeleccionada, habitacionPrecio }) => {
-    const [fechaMinima, setFechaMinima] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [daysDifference, setDaysDifference] = useState(0);
-
-    useEffect(() => {
-        // Establecer la fecha mínima como la fecha actual en formato YYYY-MM-DD
-        const today = new Date().toISOString().split('T')[0];
-        setFechaMinima(today);
-    }, []);
-
-    const calculateDaysBetween = () => {
-        if (!startDate || !endDate) {
-            alert('Por favor, ingresa ambas fechas');
-            return 0;
-        }
-
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-
-        // Calcular diferencia en milisegundos
-        const diffTime = Math.abs(end - start);
-
-        // Convertir milisegundos a días
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-        setDaysDifference(diffDays);
-        return diffDays;
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // Validaciones antes de crear la reserva
-        if (!startDate || !endDate) {
-            alert('Por favor, selecciona las fechas de inicio y fin');
-            return;
-        }
-
-        if (new Date(startDate) >= new Date(endDate)) {
-            alert('La fecha de fin debe ser posterior a la fecha de inicio');
-            return;
-        }
-
-        console.log("Reservacion Creada");
-        onClose();
-    };
-
-    useEffect(() => {
-        // Calcular días cada vez que cambien las fechas
-        if (startDate && endDate) {
-            calculateDaysBetween();
-        }
-    }, [startDate, endDate]);
-
-    return(
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-            <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-11/12 max-w-md transform transition-all duration-300 ease-in-out hover:scale-105">
-                <h2 className="text-3xl font-serif text-white text-center mb-8">Crear Reservacion</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1">Habitacion:</label>
-                        <input
-                            type="text"
-                            className="form-input text-black border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition duration-150 ease-in-out w-full p-2"
-                            value={habitacionSeleccionada}
-                            readOnly
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1 flex justify-between">
-                            <span>Fecha Inicio:</span>
-                            <span>Fecha Fin:</span>
-                        </label>
-                        <div className="flex space-x-2">
-                            <input
-                                type="date"
-                                value={startDate}
-                                onChange={(e) => setStartDate(e.target.value)}
-                                className="form-input text-black border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition duration-150 ease-in-out w-full p-2"
-                                min={fechaMinima}
-                            />
-                            <input
-                                type="date"
-                                value={endDate}
-                                onChange={(e) => setEndDate(e.target.value)}
-                                className="form-input text-black border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition duration-150 ease-in-out w-full p-2"
-                                min={startDate || fechaMinima}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1">Precio Total:</label>
-                        <input
-                            type="text"
-                            className="form-input text-black border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition duration-150 ease-in-out w-full p-2"
-                            value={`$${(habitacionPrecio * daysDifference).toFixed(2)}`}
-                            readOnly
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-800 text-white font-semibold py-2 rounded-md shadow hover:bg-blue-700 transition duration-200 ease-in-out"
-                    >
-                        Reservar
-                    </button>
-                </form>
-                <button
-                    onClick={onClose}
-                    className="mt-4 text-red-400 hover:underline text-sm w-full"
-                >
-                    Cerrar
-                </button>
-            </div>
-        </div>
-    );
-};
 
 const Habitaciones = () => {
     const [selectedRoom, setSelectedRoom] = useState(null);
@@ -259,7 +141,6 @@ const Habitaciones = () => {
                     habitacionPrecio={habitacionPrecio}
                 />
             )}
-
 
             {/* Modal para detalles de la habitación */}
             {selectedRoom && (

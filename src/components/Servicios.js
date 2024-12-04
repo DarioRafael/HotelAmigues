@@ -1,46 +1,30 @@
 import React from 'react';
-import { Utensils, Dumbbell, Wifi, Car, Heart, Coffee } from 'lucide-react';
+import { Utensils, Coffee, Wifi, Car, GlassWater, Book, Home, Dumbbell, ShoppingBag, Tv2, Truck, ClipboardList } from 'lucide-react';
 
-const ServiceCard = ({ icon: Icon, title, description }) => (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-gray-700">
+const ServiceCard = ({ icon: Icon, title, description, cost, status }) => (
+    <div className={`bg-gray-800 p-6 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-gray-700 ${status === 'Activo' ? 'border-2 border-green-500' : ''}`}>
         <Icon className="w-12 h-12 text-red-500 mb-4" />
         <h3 className="text-xl font-bold mb-2">{title}</h3>
         <p className="text-gray-300">{description}</p>
+        <p className="text-gray-400 mt-4">Costo: ${cost}</p>
+        <p className={`mt-2 font-medium ${status === 'Activo' ? 'text-green-500' : 'text-red-500'}`}>{status}</p>
     </div>
 );
 
-const Servicios = () => {
+const HotelServices = () => {
     const services = [
-        {
-            icon: Utensils,
-            title: "Restaurante Gourmet",
-            description: "Disfrute de una experiencia culinaria excepcional con nuestro chef de renombre internacional."
-        },
-        {
-            icon: Dumbbell,
-            title: "Gimnasio 24/7",
-            description: "Mantenga su rutina de ejercicios con nuestro gimnasio completamente equipado, abierto las 24 horas."
-        },
-        {
-            icon: Wifi,
-            title: "Wi-Fi de Alta Velocidad",
-            description: "Conexión gratuita de alta velocidad en todas las áreas del hotel para mantenerse conectado."
-        },
-        {
-            icon: Car,
-            title: "Servicio de Aparcacoches",
-            description: "Olvídese del estrés de estacionar con nuestro conveniente servicio de aparcacoches."
-        },
-        {
-            icon: Heart,
-            title: "Spa y Bienestar",
-            description: "Relájese y rejuvenezca en nuestro lujoso spa con una variedad de tratamientos."
-        },
-        {
-            icon: Coffee,
-            title: "Bar y Lounge",
-            description: "Disfrute de cócteles artesanales y una atmósfera sofisticada en nuestro bar con vista panorámica."
-        }
+        { icon: Utensils, title: 'Desayuno', description: 'Desayuno buffet con opciones locales e internacionales', cost: 10, status: 'Activo' },
+        { icon: Coffee, title: 'Spa', description: 'Servicio de spa para relajación y tratamientos corporales', cost: 40, status: 'Activo' },
+        { icon: Wifi, title: 'Wi-Fi', description: 'Acceso a internet en todo el hotel', cost: 5, status: 'Activo' },
+        { icon: Car, title: 'Transporte', description: 'Servicio de transporte al aeropuerto o zona turística', cost: 20, status: 'Activo' },
+        { icon: Dumbbell, title: 'Gimnasio', description: 'Acceso a gimnasio 24 horas con equipo de última generación', cost: 15, status: 'Activo' },
+        { icon: GlassWater, title: 'Piscina', description: 'Acceso a la piscina del hotel', cost: 10, status: 'Activo' },
+        { icon: Book, title: 'Excursiones', description: 'Organización de excursiones y tours por la ciudad', cost: 30, status: 'Activo' },
+        { icon: Home, title: 'Estacionamiento', description: 'Estacionamiento privado para huéspedes', cost: 5, status: 'Activo' },
+        { icon: Tv2, title: 'Bar', description: 'Acceso al bar del hotel, con bebidas alcohólicas y no alcohólicas', cost: 8, status: 'Activo' },
+        { icon: Truck, title: 'Alquiler de bicicletas', description: 'Alquiler de bicicletas para recorrer la zona', cost: 12, status: 'Activo' },
+        { icon: ShoppingBag, title: 'Minibar', description: 'Servicio de minibar disponible en la habitación', cost: 25, status: 'Activo' },
+        { icon: ClipboardList, title: 'Laundry', description: 'Servicio de lavandería para ropa de huéspedes', cost: 20, status: 'Activo' },
     ];
 
     return (
@@ -59,4 +43,4 @@ const Servicios = () => {
     );
 };
 
-export default Servicios;
+export default HotelServices;

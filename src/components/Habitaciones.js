@@ -7,7 +7,7 @@ import Reservar from './Reservar'; // Adjust import path as needed
 // const imagenesDoble = importAll(require.context('./assets/imgdoble', false, /\.(jpg|jpeg|png)$/));
 // const imagenesFamiliar = importAll(require.context('./assets/imgfamiliar', false, /\.(jpg|jpeg|png)$/));
 // const imagenesDeluxe = importAll(require.context('./assets/imgdeluxe', false, /\.(jpg|jpeg|png)$/));
-
+//
 const Habitaciones = () => {
     const [selectedRoom, setSelectedRoom] = useState(null);
     const [selectedImageIndex, setSelectedImageIndex] = useState(null);

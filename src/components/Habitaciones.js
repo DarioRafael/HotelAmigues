@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { BedDouble, Wifi, Coffee, TrendingUp, ChevronLeft, ChevronRight } from 'lucide-react';
 import Reservar from './Reservar'; // Adjust import path as needed
 
-const importAll = (r) => r.keys().map(r);
-const imagenesSencilla = importAll(require.context('./assets/imgsencilla', false, /\.(jpg|jpeg|png)$/));
-const imagenesDoble = importAll(require.context('./assets/imgdoble', false, /\.(jpg|jpeg|png)$/));
-const imagenesFamiliar = importAll(require.context('./assets/imgfamiliar', false, /\.(jpg|jpeg|png)$/));
-const imagenesDeluxe = importAll(require.context('./assets/imgdeluxe', false, /\.(jpg|jpeg|png)$/));
+// const importAll = (r) => r.keys().map(r);
+// const imagenesSencilla = importAll(require.context('./assets/imgsencilla', false, /\.(jpg|jpeg|png)$/));
+// const imagenesDoble = importAll(require.context('./assets/imgdoble', false, /\.(jpg|jpeg|png)$/));
+// const imagenesFamiliar = importAll(require.context('./assets/imgfamiliar', false, /\.(jpg|jpeg|png)$/));
+// const imagenesDeluxe = importAll(require.context('./assets/imgdeluxe', false, /\.(jpg|jpeg|png)$/));
 
 const Habitaciones = () => {
     const [selectedRoom, setSelectedRoom] = useState(null);
@@ -23,7 +23,7 @@ const Habitaciones = () => {
             descripcion: 'Una habitación cómoda para una persona, ideal para viajes de negocios.',
             detallesAdicionales: 'Consta de una habitacion con una cama, baño, etc',
             caracteristicas: ['Wi-Fi gratis', 'Desayuno incluido', 'Servicio a la habitación 24/7'],
-            imagenes: imagenesSencilla
+            //imagenes: imagenesSencilla
         },
         {
             tipo: 'Habitación Doble',
@@ -32,7 +32,7 @@ const Habitaciones = () => {
             descripcion: 'Perfecta para parejas, con dos camas y vistas impresionantes.',
             detallesAdicionales: 'Amplio espacio con todas las comodidades necesarias',
             caracteristicas: ['Wi-Fi gratis', 'Vista panorámica', 'Minibar incluido'],
-            imagenes: imagenesDoble
+            //imagenes: imagenesDoble
         },
         {
             tipo: 'Suite Familiar',
@@ -41,7 +41,7 @@ const Habitaciones = () => {
             descripcion: 'Amplia suite con espacio para toda la familia, equipada con todas las comodidades.',
             detallesAdicionales: 'Perfecta para familias grandes',
             caracteristicas: ['Cocina equipada', 'Área de juegos', 'Smart TV'],
-            imagenes: imagenesFamiliar
+            //imagenes: imagenesFamiliar
         },
         {
             tipo: 'Habitación Deluxe',
@@ -50,7 +50,7 @@ const Habitaciones = () => {
             descripcion: 'Habitación de lujo con jacuzzi y balcón privado.',
             detallesAdicionales: 'La mejor experiencia de hospedaje',
             caracteristicas: ['Jacuzzi privado', 'Terraza exclusiva', 'Servicio de mayordomo'],
-            imagenes: imagenesDeluxe
+            //imagenes: imagenesDeluxe
         }
     ];
 

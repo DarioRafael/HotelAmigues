@@ -33,7 +33,7 @@ function PaginaPrincipal() {
                 <div className="relative z-10 text-center px-4">
                     <div className="max-w-3xl reveal">
                         <div className="title-decoration">
-                            <h1 className="text-5xl md:text-7xl mb-12 title-main elegant-shadow"
+                            <h1 className="text-5xl md:text-6xl mb-12 title-main elegant-shadow"
                                 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
                                 Bienvenido a
                                 <br />
@@ -43,8 +43,8 @@ function PaginaPrincipal() {
                             </h1>
                         </div>
                         <p className="text-xl md:text-2xl mt-12 elegant-shadow"
-                           style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400 }}>
-                            Donde cada estancia se convierte en un momento inolvidable
+                           style={{ fontFamily: "'Playfair Display', serif", fontWeight: 400 , fontStyle: "italic" }}>
+                            "Donde cada estancia se convierte en un momento inolvidable"
                         </p>
                     </div>
                 </div>

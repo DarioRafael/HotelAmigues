@@ -146,61 +146,98 @@ const Habitaciones = () => {
                 Nuestras Habitaciones
             </h1>
 
-            {/* Grid de habitaciones */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Layout horizontal de habitaciones */}
+            <div className="space-y-8 max-w-7xl mx-auto">
                 {habitaciones.map((habitacion, index) => (
                     <div
                         key={index}
-                        className="bg-gray-800 text-white p-6 rounded-lg shadow-lg transition-transform hover:scale-105"
+                        className="bg-gray-800 text-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-red-500/20 hover:scale-[1.01] border border-gray-700"
                     >
-                        <div className="relative mb-4 rounded-lg overflow-hidden">
-                            <img
-                                src={habitacion.imagenes[0]}
-                                alt={habitacion.tipo}
-                                className="w-full h-48 object-cover"
-                            />
-                            {habitacion.imagenes.length > 1 && (
-                                <div className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
-                                    +{habitacion.imagenes.length - 1} fotos
+                        <div className="grid grid-cols-1 lg:grid-cols-5 gap-0">
+                            {/* Columna izquierda: Imagen (40% del ancho) */}
+                            <div className="relative lg:col-span-2 h-64 lg:h-auto group">
+                                <img
+                                    src={habitacion.imagenes[0]}
+                                    alt={habitacion.tipo}
+                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                />
+                                {/* Overlay con degradado */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+                                {/* Badge de fotos */}
+                                {habitacion.imagenes.length > 1 && (
+                                    <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium flex items-center gap-1">
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        {habitacion.imagenes.length} fotos
+                                    </div>
+                                )}
+
+                                {/* Precio flotante en móvil */}
+                                <div className="lg:hidden absolute bottom-4 left-4">
+                                    <div className="bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg">
+                                        <span className="text-2xl font-bold">${habitacion.precio}</span>
+                                        <span className="text-sm opacity-90"> / noche</span>
+                                    </div>
                                 </div>
-                            )}
-                        </div>
+                            </div>
 
-                        <h2 className="text-2xl font-bold mb-4">{habitacion.tipo}</h2>
+                            {/* Columna derecha: Información (60% del ancho) */}
+                            <div className="lg:col-span-3 p-6 lg:p-8 flex flex-col">
+                                <div className="flex-1">
+                                    {/* Header */}
+                                    <div className="flex justify-between items-start mb-4">
+                                        <div>
+                                            <h2 className="text-3xl font-bold mb-2">{habitacion.tipo}</h2>
+                                            <div className="flex items-center text-gray-400">
+                                                <BedDouble className="mr-2" size={18} />
+                                                <span className="text-sm">{habitacion.camas} {habitacion.camas === 1 ? 'cama' : 'camas'}</span>
+                                            </div>
+                                        </div>
 
-                        <div className="flex items-center mb-4 text-gray-300">
-                            <BedDouble className="mr-2" size={20} />
-                            <span>{habitacion.camas} {habitacion.camas === 1 ? 'cama' : 'camas'}</span>
-                        </div>
+                                        {/* Precio en desktop */}
+                                        <div className="hidden lg:block text-right">
+                                            <div className="text-3xl font-bold text-yellow-400">${habitacion.precio}</div>
+                                            <div className="text-sm text-gray-400">por noche</div>
+                                        </div>
+                                    </div>
 
-                        <p className="text-2xl font-bold mb-4 text-yellow-400">
-                            ${habitacion.precio} <span className="text-base font-normal text-gray-400">/ noche</span>
-                        </p>
+                                    {/* Descripción */}
+                                    <p className="text-gray-300 mb-6 leading-relaxed">{habitacion.descripcion}</p>
 
-                        <p className="mb-4 text-gray-300">{habitacion.descripcion}</p>
+                                    {/* Características en grid */}
+                                    <div className="mb-6">
+                                        <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Incluye</h4>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                            {habitacion.caracteristicas.map((caracteristica, i) => (
+                                                <div key={i} className="flex items-center text-gray-300 bg-gray-700/50 rounded-lg px-3 py-2">
+                                                    <div className="text-yellow-400 mr-3">
+                                                        {getCaracteristicaIcon(i)}
+                                                    </div>
+                                                    <span className="text-sm">{caracteristica}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <ul className="mb-6 space-y-2">
-                            {habitacion.caracteristicas.map((caracteristica, i) => (
-                                <li key={i} className="flex items-center text-sm text-gray-300">
-                                    {getCaracteristicaIcon(i)}
-                                    {caracteristica}
-                                </li>
-                            ))}
-                        </ul>
-
-                        <div className="flex gap-3">
-                            <button
-                                onClick={() => handleRoomClick(habitacion)}
-                                className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded transition-colors"
-                            >
-                                Ver detalles
-                            </button>
-                            <button
-                                onClick={() => handleReservar(habitacion)}
-                                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition-colors"
-                            >
-                                Reservar
-                            </button>
+                                {/* Botones */}
+                                <div className="flex gap-3 pt-4 border-t border-gray-700">
+                                    <button
+                                        onClick={() => handleRoomClick(habitacion)}
+                                        className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 hover:shadow-lg"
+                                    >
+                                        Ver detalles
+                                    </button>
+                                    <button
+                                        onClick={() => handleReservar(habitacion)}
+                                        className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-red-500/50"
+                                    >
+                                        Reservar ahora
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 ))}

@@ -12,19 +12,19 @@ const Login = ({ onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-            <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-11/12 max-w-md transform transition-all duration-300 ease-in-out hover:scale-105">
+        <div className="fixed inset-0 flex items-start mt-20 justify-end pr-20 bg-black bg-opacity-15 z-50">
+            <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-11/12 max-w-md transform transition-all duration-300 ease-in-out hover:scale-105">
                 <h2 className="text-3xl font-serif text-white text-center mb-8">Iniciar Sesión</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label className="block text-sm font-medium text-gray-300 mb-1">Email:</label>
                         <input
-                            type="email"
+                            type="text"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                             className="form-input text-black border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition duration-150 ease-in-out w-full p-2"
-                            placeholder="Introduce tu email"
+                            placeholder="Introduce tu usuario o email"
                         />
                     </div>
                     <div>

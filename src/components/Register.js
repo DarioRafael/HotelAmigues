@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const Register = ({ onClose }) => {
     const [nombre, setNombre] = useState('');
+    const [usuario, setUsuario] = useState('');
     const [apellidos, setApellidos] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -9,15 +10,26 @@ const Register = ({ onClose }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Lógica de registro aquí
-        console.log("Registrando con:", { nombre, apellidos, email, password });
+        console.log("Registrando con:", { nombre, usuario, apellidos, email, password });
         onClose(); // Cerrar el modal después de registrar (o según tu lógica)
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
+        <div className="fixed inset-0 flex items-center justify-end pr-10 bg-black bg-opacity-15 z-50">
             <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-11/12 max-w-md transform transition-all duration-300 ease-in-out hover:scale-105">
                 <h2 className="text-3xl font-serif text-white text-center mb-8">Crear Nueva Cuenta</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-1">Usuario:</label>
+                        <input
+                            type="text"
+                            value={usuario}
+                            onChange={(e) => setUsuario(e.target.value)}
+                            required
+                            className="form-input text-black border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition duration-150 ease-in-out w-full p-2"
+                            placeholder="Introduce tu usuario"
+                        />
+                    </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-300 mb-1">Nombre(s):</label>
                         <input

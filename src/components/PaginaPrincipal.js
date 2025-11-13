@@ -37,7 +37,7 @@ function PaginaPrincipal() {
                                 style={{ fontFamily: "'Cormorant Garamond', serif" }}>
                                 Bienvenido a
                                 <br />
-                                <span className="block mt-4 text-6xl md:text-8xl">
+                                <span className="block mt-4 text-6xl md:text-8xl pb-3">
                                     Hotel Amigues
                                 </span>
                             </h1>
